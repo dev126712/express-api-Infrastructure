@@ -23,7 +23,7 @@ jobs:
       with:
         directory:  .github/workflows
         output_format: cli
-        soft_fail: true
+        soft_fail: fail
         quiet: true  
 
   secirity-scan-on-terraform-files:
@@ -39,5 +39,5 @@ jobs:
       with:
         directory:  Infrastructure
         output_format: cli
-        soft_fail: true
+        soft_fail: fail
         quiet: true
