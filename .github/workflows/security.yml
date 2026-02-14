@@ -2,11 +2,14 @@ name: Security check
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
     paths: 
       - '**.tf'
+      - '**.yml'
       - 'Infrastructure/**'
+      - '.github/workflows/**'
 
 permissions:
   contents: read
@@ -27,11 +30,12 @@ jobs:
         output_format: cli
         soft_fail: false
         quiet: true  
+        framework: github_actions
 
   secirity-scan-on-terraform-files:
     runs-on: ubuntu-latest
     permissions:
-      contents: write 
+      contents: read
     steps:
     - name: checkout repo
       uses: actions/checkout@v4
@@ -39,7 +43,8 @@ jobs:
     - name: Run Checkov Security Scan on yml files
       uses: bridgecrewio/checkov-action@master
       with:
-        directory:  Infrastructure
+        directory:  ./Infrastructure
         output_format: cli
         soft_fail: false
         quiet: true
+        framework: terraform,kubernetes
