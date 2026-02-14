@@ -3,6 +3,8 @@ name: Infrastructure CD
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'Infrastructure/**'
   pull_request:
     branches: [ main ]
     paths:
