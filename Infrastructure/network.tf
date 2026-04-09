@@ -1,4 +1,3 @@
-# VPC Network
 resource "google_compute_network" "main" {
   name                    = "main-vpc"
   auto_create_subnetworks = false
@@ -21,14 +20,12 @@ resource "google_compute_subnetwork" "private" {
   }
 }
 
-# Cloud Router (Required for NAT)
 resource "google_compute_router" "router" {
   name    = "router"
   region  = "us-central1"
   network = google_compute_network.main.id
 }
 
-# Cloud NAT Gateway
 resource "google_compute_router_nat" "nat" {
   name                               = "nat"
   router                             = google_compute_router.router.name
